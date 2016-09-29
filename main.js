@@ -3,15 +3,17 @@
 var http = require('http');
 const publicIp = require('public-ip');
 
+
+var setMacAddress = "EC:AD:B8:0A:BB:AD";
+
+
 var server = http.createServer(function(req, res) {
   console.log("Request received.");
   res.writeHead(200, {"Content-Type": "application/json"});
-  var otherArray = ["success1", "success2"];
-  var otherObject = { item1: "success1val", item2: "success2val" };
+ // var otherArray = ["success1", "success2"];
+  //var otherObject = { item1: "success1val", item2: "success2val" };
   var json = JSON.stringify({
-    anObject: otherObject,
-    anArray: otherArray,
-    another: "item"
+    "MAC": setMacAddress
   });
   res.end(json);
 });

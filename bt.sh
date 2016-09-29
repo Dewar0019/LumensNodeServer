@@ -1,23 +1,15 @@
 #!/bin/bash
-# declare STRING variable
-STRING="Hello World"
-#print variable on a screen
-echo $STRING
 
-s1="Not Connected."
+rfcomm connect 0 EC:AD:B8:0A:BB:AD 1>/dev/null &
+sleep 3
 
+result=$(hcitool rssi EC:AD:B8:0A:BB:AD | awk '/value/ {print $1}')
+#looks for the word value at end of string
 
-#sudo hciconfig hci0 piscan
-
-#sudo rfcomm connect 0 EC:AD:B8:0A:BB:AD 1>/dev/null &
-
-#s0=hcitool rssi EC:AD:B8:0A:BB:AD
-s0="123"
-
-if [ "$s1" == "$s0" ]; then
-	echo $STRING
+if [[ $result ]]; then
+	echo "Found"
 else
-	echo $s1
+	echo "Not Found"
 fi
 
 
