@@ -18,10 +18,10 @@ function searchBlueTooth() {
     //Remove linebreak at end of string
     var returnStatus = (`${data}`).replace(/(\r\n|\n|\r)/gm,"");
     console.log(returnStatus);
-    if(returnStatus =! "Not Found") {
-      console.log("Found!");
+    if(returnStatus == "RSSI") {
       setMacAddress.push(`${data}`);
       setMacAddress = setMacAddress.filter(utils.unique);
+	console.log("HELLO!");
     }
   });
 }
@@ -31,6 +31,9 @@ function searchBlueTooth() {
 var server = http.createServer(function(req, res) {
   res.writeHead(200, {"Content-Type": "application/json"});
   console.log("Request received.");
+if(req.method == 'GET') {
+	console.log("GET");
+} 
   if (req.method == 'POST') {
         var jsonString = '';
 
