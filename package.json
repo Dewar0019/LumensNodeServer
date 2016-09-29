@@ -5,7 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "public-ip": "^2.0.1",
-    "nodemon": "^1.10.2",
+    "nodemon": "^1.10.2"
   },
   "devDependencies": {},
   "scripts": {

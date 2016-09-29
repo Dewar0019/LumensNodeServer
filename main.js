@@ -9,7 +9,7 @@ var setMacAddress = [];
 
 function searchBlueTooth() {
   const deploySh = spawn('sh', [ 'bt.sh' ], {
-    cwd: '/Users/DewarTan/Desktop/LumensNodeServer',
+    cwd: '/home/csfp/Desktop/LumenServer',
     env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
   });
 
