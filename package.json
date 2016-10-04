@@ -4,7 +4,8 @@
   "description": "Server to be run on raspberry pi for detecting bluetooth",
   "main": "main.js",
   "dependencies": {
-    "public-ip": "^2.0.1"
+    "public-ip": "^2.0.1",
+    "nodemon": "^1.10.2",
   },
   "devDependencies": {},
   "scripts": {
