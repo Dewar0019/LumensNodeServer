@@ -1,0 +1,23 @@
+{
+  "name": "lumens_node_server",
+  "version": "1.0.0",
+  "description": "Server to be run on raspberry pi for detecting bluetooth",
+  "main": "main.js",
+  "dependencies": {
+    "public-ip": "^2.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dewar0019/LumensNodeServer.git"
+  },
+  "author": "Dewar Tan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dewar0019/LumensNodeServer/issues"
+  },
+  "homepage": "https://github.com/Dewar0019/LumensNodeServer#readme"
+}

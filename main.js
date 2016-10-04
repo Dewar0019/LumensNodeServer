@@ -3,36 +3,45 @@
 
 var http = require('http');
 const publicIp = require('public-ip');
-const { spawn } = require('child_process')
+const spawn = require('child_process').spawn;
+
+// var setMacAddress = "EC:AD:B8:0A:BB:AD";
+var setMacAddress = [];
 
 
+function searchBlueTooth() {
+  const deploySh = spawn('sh', [ 'bt.sh' ], {
+    cwd: '/Users/DewarTan/Desktop/LumensNodeServer',
+    env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
+  });
 
+  deploySh.stdout.on('data', (data) => {
+    //Remove linebreak at end of string
+    var returnStatus = (`${data}`).replace(/(\r\n|\n|\r)/gm,"");
+    console.log(returnStatus);
+    if(returnStatus == "Not Found") {
+      console.log("Found!");
+      setMacAddress.push(`${data}`);
+      setMacAddress = setMacAddress.filter(unique);
+    }
+  });
+}
 
-
-var setMacAddress = "EC:AD:B8:0A:BB:AD";
-
+var unique = function(elem, pos,arr) {
+  return arr.indexOf(elem) == pos;
+};
 
 var server = http.createServer(function(req, res) {
-  console.log("Request received.");
   res.writeHead(200, {"Content-Type": "application/json"});
- // var otherArray = ["success1", "success2"];
-  //var otherObject = { item1: "success1val", item2: "success2val" };
-
-
-//deploySh.stdout.on('data', (data) => {
-//console.log("hi")
- // console.log(`${data}`);
-//});
-spawn('sh', [ 'bt.sh' ], {
-  cwd: '/home/csfp/Desktop/LumenServer',
-  env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
-})
-
+  console.log("Request received.");
   var json = JSON.stringify({
     "MAC": setMacAddress
   });
   res.end(json);
 });
+
+
+
 
 var port = 8080;
 server.listen(port);
@@ -43,3 +52,11 @@ publicIp.v4().then(ip => {
     console.log(ip + ":" + port);
     console.log("");
 });
+
+
+(function() {
+  var timeout = setInterval(function() {
+      searchBlueTooth();
+    console.log("Interval");
+  }, 5000);
+})();
