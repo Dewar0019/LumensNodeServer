@@ -13,7 +13,7 @@ function searchBlueTooth() {
     env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
   });
 
-  //Results of the script 
+  //Results of the script
   deploySh.stdout.on('data', (data) => {
     //Remove linebreak at end of string
     var returnStatus = (`${data}`).replace(/(\r\n|\n|\r)/gm,"");
@@ -31,6 +31,17 @@ function searchBlueTooth() {
 var server = http.createServer(function(req, res) {
   res.writeHead(200, {"Content-Type": "application/json"});
   console.log("Request received.");
+  if (req.method == 'POST') {
+        var jsonString = '';
+
+        req.on('data', function (data) {
+            jsonString += data;
+        });
+
+        req.on('end', function () {
+            console.log(JSON.parse(jsonString));
+        });
+    }
   var json = JSON.stringify({
     "MAC": setMacAddress
   });
