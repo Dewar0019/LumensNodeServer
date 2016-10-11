@@ -7,3 +7,4 @@ tries to address the connection between mobile equipments and Raspberry Pi and t
 This may providing a convenient, simply and efficient way to control the light in your room by using your cell phone or Mac. The ways of 
 connection we choose are both HTMI or bluetooth. 
 
+Features
