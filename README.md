@@ -21,6 +21,7 @@ connection we choose are both HTMI or bluetooth.
 ##Related
 Field Project Intro: http://csfp.s3-website-us-west-2.amazonaws.com/content/projects/digitallumens.md/
 DigitalLumens:https://www.digitallumens.com/products/led-linear-lighting/
+
 Author: Dewar Tan, Mingze Li, Bo Wen and ArionBold - Abu
 
 ##License
