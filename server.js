@@ -35,7 +35,8 @@ deviceName: 'volen118'
 .end(function (response) {
   console.log(response.body);
 });
-console.log("Updating lists of registered devices");
+
+
 
 //Display public ip of node program
 publicIp.v4().then(ip => {
@@ -76,7 +77,8 @@ function searchBlueTooth() {
 (function() {
   var timeout = setInterval(function() {
       searchBlueTooth();
-    console.log(".");
+      console.log("Updating lists of registered devices");
+      console.log(".");  
   }, 5000);
 })();
 })
