@@ -20,6 +20,17 @@ app.post('/',function  (req, res) {
    console.log(req.body);
    res.send('hello POST');
 })
+// URL: /getstatus
+// POST request
+
+unirest.post('http://lightswtich2.herokuapp.com/getstatus')
+.type('json')
+.send({
+  deviceName: 'volen118'
+})
+.end(function (response) {
+  console.log(response.body);
+});
 
 
 var server = app.listen(8081, function() {
