@@ -78,7 +78,7 @@ function searchBlueTooth() {
   var timeout = setInterval(function() {
       searchBlueTooth();
       console.log("Updating lists of registered devices");
-      console.log(".");  
+      console.log(".");
   }, 5000);
 })();
 })
