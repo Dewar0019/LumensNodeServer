@@ -16,8 +16,9 @@ app.get('/',function  (req, res) {
 })
 app.post('/',function  (req, res) {
    console.log("got a POST request for the homepage");
-   var device_name = req.body.device;
-   var mac_add = req.body.macAdd
+   var device_name = req.device_name1.name;
+   var mac_add = req.device_name1.mac_add;
+   console.log("Lists of registered devices:")
    console.log("Device name = " + device_name);
    console.log("Mac address = " + mac_add);
    res.send('hello POST');
