@@ -26,17 +26,16 @@ var server = app.listen(8081, function() {
    var host = server.address().address
    var port = server.address().port
 
-   //Sending post request to update the list of registered devices
+//Sending post request to update the list of registered devices
 unirest.post('http://lightswtich2.herokuapp.com/getstatus')
-  .type('json')
-  .send({
-  deviceName: 'volen118'
-  })
-  .end(function (response) {
-    console.log("Updating lists of registered devices");
-    console.log(response.body);
-  });
-
+.type('json')
+.send({
+deviceName: 'volen118'
+})
+.end(function (response) {
+  console.log(response.body);
+});
+console.log("Updating lists of registered devices");
 
 //Display public ip of node program
 publicIp.v4().then(ip => {
