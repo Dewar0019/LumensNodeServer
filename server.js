@@ -31,7 +31,7 @@ unirest.post('http://lightswtich2.herokuapp.com/getstatus')
 .end(function (response) {
   console.log(response.body);
 });
-consolre.log("POST sends to Cloud");
+console.log("POST sends to Cloud");
 
 
 var server = app.listen(8081, function() {
