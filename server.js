@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require("body-parser");
 var app = express();
+var unirest = require('unirest');
 const publicIp = require('public-ip');
 var utils = require('./utilities')
 const spawn = require('child_process').spawn;
@@ -14,11 +15,11 @@ app.get('/',function  (req, res) {
    console.log("got a GET request for the homepage");
    res.send('hello GET');
 })
-app.post('/',function  (req, res) {
+app.post('/updateMe',function  (req, res) {
    console.log("got a POST request for the homepage");
    console.log("Lists of registered devices:");
    console.log(req.body);
-   res.send('hello POST');
+   res.send('success');
 })
 
 
@@ -27,14 +28,18 @@ var server = app.listen(8081, function() {
    var port = server.address().port
 
 //Sending post request to update the list of registered devices
-unirest.post('http://lightswtich2.herokuapp.com/getstatus')
+var retrieveDevices = function() {
+ unirest.post('http://192.168.1.82:8080/getStatus')
 .type('json')
 .send({
 deviceName: 'volen118'
 })
 .end(function (response) {
-  console.log(response.body);
+if(response.body !== undefined) {
+  setMacAddress= response.body;
+}
 });
+}
 
 
 
@@ -55,7 +60,9 @@ var setMacAddress = [];
 
 
 function searchBlueTooth() {
-  const deploySh = spawn('sh', [ 'bt.sh' ], {
+for(var i =0; i<setMacAddress.length; i++) {
+	var currAddr = setMacAddress[i];
+  const deploySh = spawn('sh', [ 'bt.sh', currAddr ], {
     cwd: '/home/csfp/Desktop/LumenServer',
     env: Object.assign({}, process.env, { PATH: process.env.PATH + ':/usr/local/bin' })
   });
@@ -66,11 +73,10 @@ function searchBlueTooth() {
     var returnStatus = (`${data}`).replace(/(\r\n|\n|\r)/gm,"");
     console.log(returnStatus);
     if(returnStatus == "RSSI") {
-      setMacAddress.push(`${data}`);
-      setMacAddress = setMacAddress.filter(utils.unique);
-	console.log("HELLO!");
+	console.log("HELLO! " + setMacAddress[i]);
     }
   });
+}
 }
 
 //Runs the interval method to look for bluetooth connection
@@ -79,6 +85,12 @@ function searchBlueTooth() {
       searchBlueTooth();
       console.log("Updating lists of registered devices");
       console.log(".");
-  }, 5000);
+  }, (5000*setMacAddress.length)+1000);
+
+var retriever = setInterval(function() {
+      retrieveDevices();
+      console.log("Retrieving lists of registered devices");
+      console.log(".");
+  }, 10000);
 })();
 })
