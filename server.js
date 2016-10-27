@@ -39,6 +39,7 @@ var server = app.listen(8081, function() {
             .end(function(response) {
                 if (response.body !== undefined) {
                     setMacAddress = response.body;
+					foundAddress = new Set();
                 }
             });
     }
@@ -59,13 +60,11 @@ var server = app.listen(8081, function() {
     // var setMacA
     // var timeout = setInterval(fuddress = "EC:AD:B8:0A:BB:AD";
     var setMacAddress = [];
+	var foundAddress = new Set();
 
+    function searchBlueTooth(macAddress) {
 
-    function searchBlueTooth() {
-        for (var i = 0; i < setMacAddress.length; i++) {
-            console.log(setMacAddress).length;
-            var currAddr = setMacAddress[i];
-            const deploySh = spawn('sh', ['bt.sh', currAddr], {
+            const deploySh = spawn('sh', ['bt.sh', macAddress], {
                 cwd: '/home/csfp/Desktop/LumenServer',
                 env: Object.assign({}, process.env, {
                     PATH: process.env.PATH + ':/usr/local/bin'
@@ -78,17 +77,23 @@ var server = app.listen(8081, function() {
                 var returnStatus = (`${data}`).replace(/(\r\n|\n|\r)/gm, "");
                 console.log(returnStatus);
                 if (returnStatus == "RSSI") {
-                    console.log("HELLO! " + setMacAddress[i]);
+                    console.log("Found " + macAddress + " nearby");
+					foundAddress.add(macAddress);
                 }
             });
-        }
+        
     }
 
     //Runs the interval method to look for bluetooth connection
     (function() {
         var timeout = setInterval(function() {
-            searchBlueTooth();
-            console.log("Updating lists of registered devices");
+			for(var i =0; i<setMacAddress.length;i++) {
+				if(!foundAddress.has(setMacAddress[i])) {
+					console.log("Searching for address: " +setMacAddress[i]);
+            		searchBlueTooth(setMacAddress[i]);
+				}
+			}
+
             console.log(".");
         }, (5000 * setMacAddress.length) + 1000);
 
