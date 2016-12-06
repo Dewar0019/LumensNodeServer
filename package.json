@@ -1,27 +1,29 @@
 {
-  "name": "lumens_node_server",
-  "version": "1.0.0",
-  "description": "Server to be run on raspberry pi for detecting bluetooth",
-  "main": "app.js",
-  "dependencies": {
-    "body-parser": "^1.15.2",
-    "express": "^4.14.0",
-    "nodemon": "^1.10.2",
-    "public-ip": "^2.0.1",
-	"unirest": "^0.5.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dewar0019/LumensNodeServer.git"
-  },
-  "author": "Dewar Tan",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dewar0019/LumensNodeServer/issues"
-  },
-  "homepage": "https://github.com/Dewar0019/LumensNodeServer#readme"
+    "name": "lumens_node_server",
+    "version": "1.0.0",
+    "description": "Server to be run on raspberry pi for detecting bluetooth",
+    "main": "app.js",
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "express": "^4.14.0",
+        "nodemon": "^1.10.2",
+        "public-ip": "^2.0.1",
+        "dotenv": "^2.0.0",
+        "unirest": "^0.5.1",
+        "async": "2.1.4"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Dewar0019/LumensNodeServer.git"
+    },
+    "author": "Dewar Tan",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Dewar0019/LumensNodeServer/issues"
+    },
+    "homepage": "https://github.com/Dewar0019/LumensNodeServer#readme"
 }
