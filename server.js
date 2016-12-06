@@ -135,13 +135,13 @@ var server = app.listen(8081, function() {
     //Runs the interval method to look for bluetooth connection
     (function() {
         var timeout = setInterval(function() {
-            for (obj in setMacAddress) {
-                console.log(obj);
-                if (!foundAddress.has(setMacAddress[obj])) {
-                    console.log("Searching for address: " + setMacAddress[obj]);
-                    searchBlueTooth(setMacAddress[obj]);
-                }
-            }
+            // for (obj in setMacAddress) {
+            //     // console.log(obj);
+            //     if (!foundAddress.has(setMacAddress[obj])) {
+            //         // console.log("Searching for address: " + setMacAddress[obj]);
+            //         // searchBlueTooth(setMacAddress[obj]);
+            //     }
+            // }
         }, 5000);
 
         var retriever = setInterval(function() {

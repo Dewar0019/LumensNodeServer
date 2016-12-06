@@ -29,6 +29,7 @@ function getAuthToken() {
                 authToken = response.body.access_token;
                 connection.open()
             } else {
+                console.log(err);
                 console.log("Could not get auth token");
             }
         });
